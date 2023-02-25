@@ -1,0 +1,2 @@
+# all-in-one
+INSTALAÇÃO SEMIAUTONOMA DE SERVIDOR Cliente VPN-L2TP + GLPI 10.0.6 + ZABBIX 6.0-4 + GRAFANA 9.3.6 + MariaDB server + PHPMyAdmin
