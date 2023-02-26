@@ -129,7 +129,7 @@ echo "
 #                BAIXANDO O INSTALADOR DA VPN-L2TP/IPSEC                #
 #########################################################################
 "
-wget ""
+wget https://github.com/AnaliseIT/all-in-one/blob/main/install_vpnl2tp-ipsec.sh
 
 sleep 5
 
@@ -160,7 +160,7 @@ echo "
 #                  BAIXANDO O INSTALADOR DO GLPI 10.0.6                 #
 #########################################################################
 "
-wget ""
+wget https://github.com/AnaliseIT/all-in-one/blob/main/install_glpi.sh
 
 sleep 5
 
@@ -191,7 +191,7 @@ echo "
 #                  BAIXANDO O INSTALADOR DO ZABBIX 6.0                  #
 #########################################################################
 "
-wget ""
+wget https://github.com/AnaliseIT/all-in-one/blob/main/install_zabbix.sh
 
 sleep 5
 
@@ -222,7 +222,7 @@ echo "
 #              BAIXANDO O INSTALADOR DO GRAFANA 9.3.6 OSS               #
 #########################################################################
 "
-wget ""
+wget https://github.com/AnaliseIT/all-in-one/blob/main/install_grafana.sh
 
 sleep 5
 
@@ -260,25 +260,12 @@ echo "
 #		2. "./install_glpi.sh"					#
 #		3. "./install_zabbix.sh"				#
 #		4. "./install_grafana.sh"				#
-#		5. "./install_phpmyadmin.sh"				#
 #########################################################################
 "
 sleep 10
 
 clear
 
-#$IMAGEM_CAB
-#echo "Lembre-se: este material tem como objetivo facilitar a implantação dos sistemas listados e recomendo que leiam todo o material de cada desenvolvedor afim de conhecer e aplicar todas as regras de segurança possiveis."
-#sleep 0.3
-#echo "Após a instalação, façam seus ajustes de acordo com suas necessidades e regras."
-#sleep 0.3
-#echo "me chamo WILLIAM ALMEIDA e desenvolvi este materia após passar meses batendo a "CABEÇA" com dificuldade em instalar esses sistemas em um ALL-IN-ONE."
-#sleep 0.3
-#echo "Caso deseje fazer uma doação, deixo abaixo um link e uma chave PIX"
-#sleep 0.3
-#echo "Essa doação me ajudará a criar e/ou melhorar esse e outros arquivos e facilitar ainda mais a vida de cada um de vocês."
-#sleep 5
-#echo "QRCode DOAÇÃO"
-#qrencode -t ANSI "https://nubank.com.br/pagar/10cso/WltpQopXS7"
-#sleep 100
+$IMAGEM_CAB
 
+./install_vpnl2tp-ipsec.sh
