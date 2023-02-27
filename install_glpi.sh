@@ -248,4 +248,4 @@ sleep 2
 
 clear
 $IMAGEM_CAB
-./install_zabbix.sh
+sudo ./install_zabbix.sh
