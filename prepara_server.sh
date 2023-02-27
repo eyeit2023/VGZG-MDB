@@ -103,7 +103,7 @@ $IMAGEM_CAB
 
 echo "
 #########################################################################
-#           AJUSTANDO OS ARQUIVOS DO SERVIDOR FINALIZADO                #
+#            AJUSTES DOS ARQUIVOS DO SERVIDOR FINALIZADO                #
 #########################################################################
 "
 
@@ -120,130 +120,11 @@ echo "
 "
 sleep 10
 
-clear
-
-$IMAGEM_CAB
-
-echo "
-#########################################################################
-#                BAIXANDO O INSTALADOR DA VPN-L2TP/IPSEC                #
-#########################################################################
-"
-wget https://github.com/AnaliseIT/all-in-one/blob/main/install_vpnl2tp-ipsec.sh
-
-sleep 5
-
-clear
-$IMAGEM_CAB
-echo "Aplicando permissão de execução"
-chmod +x install_vpnl2tp-ipsec.sh
-
-sleep 5
-
-clear
-$IMAGEM_CAB
-sleep 5
-
-echo "
-#########################################################################
-#      PARA INICIAR EXECUTE O COMANDO (./install_vpnl2tp-ipsec.sh)      #
-#########################################################################
-"
-sleep 10
-
-clear
-
-$IMAGEM_CAB
-
-echo "
-#########################################################################
-#                  BAIXANDO O INSTALADOR DO GLPI 10.0.6                 #
-#########################################################################
-"
-wget https://github.com/AnaliseIT/all-in-one/blob/main/install_glpi.sh
-
-sleep 5
-
-clear
-$IMAGEM_CAB
-echo "Aplicando permissão de execução"
-chmod +x install_glpi.sh
-
-sleep 5
-
-clear
-$IMAGEM_CAB
-sleep 5
-
-echo "
-#########################################################################
-#          PARA INICIAR EXECUTE O COMANDO (./install_glpi.sh)           #
-#########################################################################
-"
-sleep 10
-
-clear
-
-$IMAGEM_CAB
-
-echo "
-#########################################################################
-#                  BAIXANDO O INSTALADOR DO ZABBIX 6.0                  #
-#########################################################################
-"
-wget https://github.com/AnaliseIT/all-in-one/blob/main/install_zabbix.sh
-
-sleep 5
-
-clear
-$IMAGEM_CAB
-echo "Aplicando permissão de execução"
-chmod +x install_zabbix.sh
-
-sleep 5
-
-clear
-$IMAGEM_CAB
-sleep 5
-
-echo "
-#########################################################################
-#         PARA INICIAR EXECUTE O COMANDO (./install_zabbix.sh)          #
-#########################################################################
-"
-sleep 10
-
-clear
-
-$IMAGEM_CAB
-
-echo "
-#########################################################################
-#              BAIXANDO O INSTALADOR DO GRAFANA 9.3.6 OSS               #
-#########################################################################
-"
-wget https://github.com/AnaliseIT/all-in-one/blob/main/install_grafana.sh
-
-sleep 5
-
-clear
-$IMAGEM_CAB
-echo "Aplicando permissão de execução"
-chmod +x install_grafana.sh
-
-sleep 5
-
-clear
-$IMAGEM_CAB
-sleep 5
-
-echo "
-#########################################################################
-#        PARA INICIAR EXECUTE O COMANDO (./install_grafana.sh)          #
-#########################################################################
-"
-
-sleep 10
+sudo git clone https://github.com/AnaliseIT/all-in-one.git
+sudo chmod +x /all-in-one/*
+cd all-in-one/
+sudo cp install_* ../
+cd
 
 clear
 
