@@ -150,5 +150,5 @@ sleep 2
 
 clear
 $IMAGEM_CAB
-./install_glpi.sh
+sudo ./install_glpi.sh
 
