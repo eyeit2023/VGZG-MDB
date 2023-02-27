@@ -175,4 +175,4 @@ sleep 10
 
 clear
 $IMAGEM_CAB
-./install_grafana.sh
+sudo ./install_grafana.sh
