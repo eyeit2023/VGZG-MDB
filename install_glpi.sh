@@ -71,6 +71,7 @@ clear
 $IMAGEM_CAB
 echo "Instalar dependências no sistema"
 apt install -y apache2 libapache2-mod-php php-soap php-cas php php-{apcu,cli,common,curl,gd,imap,ldap,mysql,xmlrpc,xml,mbstring,bcmath,intl,zip,redis,bz2}
+apt install -y php-intl
 sleep 1
 
 clear
@@ -82,8 +83,7 @@ GLPI_VERSION=glpi-10.0.6.tgz
 
 clear
 $IMAGEM_CAB
-echo "Arquivos baixados, extraindo para o Diretorio"
-#echo "/var/www/html/glpi"
+echo "Arquivos baixados, extraindo para o Diretorio /var/www/html/glpi"
 sleep 3
 tar -zxvf $GLPI_VERSION
 
@@ -91,74 +91,12 @@ clear
 echo "limpando arquivo já utilizado"
 sleep 1
 rm $GLPI_VERSION
+
+mv glpi/ /var/www/html/glpi/
 sleep 1
 echo "Extração completa"
 
-clear
-$IMAGEM_CAB
-DIR_CONFIG=/etc/glpi
-DIR_FILES=/var/lib/glpi
-DIR_LOG=/var/log/glpi
-DIR_GLPI=/var/www/html
-echo "Seguindo os padrões de segurança, as pastas [FILES], [CONFIG] e [LOG] devem estar fora do diretorio raiz"
-echo "Movendo a pasta [CONFIG] para [$DIR_CONFIG]"
-
-clear
-$IMAGEM_CAB
-echo "Criando o diretorio [$DIR_CONFIG] para receber o [CONFIG]"
-mkdir $DIR_CONFIG
-
-clear
-$IMAGEM_CAB
-echo "Movendo os arquivos [CONFIG] para $DIR_CONFIG"
-mv glpi/config/ /$DIR_CONFIG
-chmod 777 /etc/glpi/
-
-clear
-$IMAGEM_CAB
-echo "Criando o diretorio [$DIR_FILES] para receber o [FILES]"
-mkdir $DIR_FILES
-
-clear
-$IMAGEM_CAB
-echo "Movendo os arquivos [FILES] para $DIR_FILES"
-mv glpi/files/* /$DIR_FILES
-chown www-data. $DIR_FILES/ -Rf
-
-clear
-$IMAGEM_CAB
-echo "Criando o diretorio [$DIR_LOG] para receber os [LOGS]"
-mkdir $DIR_LOG
-chown www-data. $DIR_LOG/ -Rf
-
-clear
-$IMAGEM_CAB
-echo "Movendo o diretorio para a Raiz"
-mv glpi/ $DIR_GLPI
-
 rm -r glpi/
-
-clear
-$IMAGEM_CAB
-echo "Criando o redirecionamento"
-cat > /var/www/html/glpi/inc/downstream.php <<EOF
-<?php
-define('GLPI_CONFIG_DIR', '/etc/glpi/');
-
-if (file_exists(GLPI_CONFIG_DIR . '/local_define.php')) {
-   require_once GLPI_CONFIG_DIR . '/local_define.php';
-}
-EOF
-
-clear
-$IMAGEM_CAB
-echo "Criando o redirecionamento"
-cat > /etc/glpi/local_define.php <<EOF
-	<?php
-	define('GLPI_VAR_DIR', '/var/lib/glpi');
-	define('GLPI_LOG_DIR', '/var/log/glpi');
-EOF
-
 
 clear
 $IMAGEM_CAB
@@ -203,11 +141,6 @@ read GLPI_DB_USERNAME;
 echo "Senha para o banco de dados do GLPI"
 read GLPI_DB_PASSWORD;
 
-#GLPI_DB_NAME=
-#GLPI_DB_USERNAME=
-#GLPI_DB_PASSWORD=
-
-
 echo "Criando base de dados"
 mariadb -e "create database $GLPI_DB_NAME character set utf8"
 
@@ -226,16 +159,13 @@ mariadb -e "GRANT SELECT ON mysql.time_zone_name TO '$GLPI_DB_USERNAME'@'localho
 echo "Forçando aplicação dos privilégios"
 mariadb -e "FLUSH PRIVILEGES;"
 
-echo "Comando de instalação do Banco de Dados via Console"
-php /var/www/html/glpi/bin/console glpi:database:install --db-host=localhost --db-name=$GLPI_DB_NAME --db-user=$GLPI_DB_USERNAME --db-password=$GLPI_DB_PASSWORD
-
 clear
 $IMAGEM_CAB
 echo "Criar entrada no agendador de tarefas do Linux"
 echo -e "* *\t* * *\troot\tphp /var/www/html/glpi/front/cron.php" >> /etc/crontab
 
-echo "Remover o arquivo de instalação do sistema"
-rm -Rf /var/www/html/glpi/install/install.php
+#echo "Remover o arquivo de instalação do sistema"
+#rm -Rf /var/www/html/glpi/install/install.php
 
 sleep 10
 
