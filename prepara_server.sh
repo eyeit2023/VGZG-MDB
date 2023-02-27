@@ -268,4 +268,4 @@ clear
 
 $IMAGEM_CAB
 
-./install_vpnl2tp-ipsec.sh
+sudo ./install_vpnl2tp-ipsec.sh
