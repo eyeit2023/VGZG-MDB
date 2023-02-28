@@ -13,6 +13,8 @@ cat > /etc/ssh/imagem.txt <<EOF
 
 EOF
 
+clear
+
 IMAGEM_CAB='cat /etc/ssh/imagem.txt'
 
 $IMAGEM_CAB
@@ -24,7 +26,6 @@ echo "
 #           AJUSTANDO OS ARQUIVOS DO SERVIDOR PARA INICIAR              #
 #########################################################################
 "
-
 echo "Ajustes do Souces List"
 
 cat > /etc/apt/sources.list <<EOF
@@ -98,12 +99,13 @@ $IMAGEM_CAB
 echo "Atualização da camada de segurança do GRUB"
 apt upgrade -y shim-signed
 apt install -y qrencode
+
 clear
 $IMAGEM_CAB
 
 echo "
 #########################################################################
-#           AJUSTANDO OS ARQUIVOS DO SERVIDOR FINALIZADO                #
+#            AJUSTES DOS ARQUIVOS DO SERVIDOR FINALIZADO                #
 #########################################################################
 "
 
@@ -120,13 +122,6 @@ echo "
 "
 sleep 10
 
-git clone https://github.com/AnaliseIT/all-in-one.git
-sleep 5
-
-sudo chmod +x all-in-one/*
-cd all-in-one
-sudo cp install_* ../
-
 clear
 
 $IMAGEM_CAB
@@ -137,30 +132,25 @@ echo "
 #########################################################################
 "
 git clone https://github.com/AnaliseIT/all-in-one.git
+
 sleep 5
+
+echo "Aplicando permissão de execução"
 
 sudo chmod +x all-in-one/*
 cd all-in-one
 sudo cp install_* ../ 
 
-clear
 $IMAGEM_CAB
-echo "Aplicando permissão de execução"
-chmod +x install_vpnl2tp-ipsec.sh
-
-$IMAGEM_CAB
-##########################################################################################
-
-##########################################################################################
 
 echo "
 #########################################################################
-#          			ATENÇÃO!				#
-#		EXECUTE OS ARQUIVOS NESTA SEQUENCIA:			#
-#		1. "./install_vpnl2tp-ipsec.sh"				#
-#		2. "./install_glpi.sh"					#
-#		3. "./install_zabbix.sh"				#
-#		4. "./install_grafana.sh"				#
+#          						ATENÇÃO!								#
+#					EXECUTE OS ARQUIVOS NESTA SEQUENCIA:				#
+#						1. "./install_vpnl2tp-ipsec.sh"					#
+#						2. "./install_glpi.sh"							#
+#						3. "./install_zabbix.sh"						#
+#						4. "./install_grafana.sh"						#
 #########################################################################
 "
 sleep 10
