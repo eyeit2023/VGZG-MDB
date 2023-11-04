@@ -345,6 +345,25 @@ systemctl reload apache2
 
 clear
 
+# Configurando SSL para o site
+
+echo "Vamos realizar a instalação do certificado SSL para o site"
+
+echo "Instalar o 'CERTBOT'"
+
+apt install -y certbot python3-certbot-apache
+
+echo "Solicitar o Certificado SSL para o site"
+
+certbot --apache -d $SITE
+
+echo "Configurar renovação automática do certificado SSL"
+
+SHELL=/bin/bash
+PAT=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+0 */12 * * * root test -x /usr/bin/certbot -a \! -d /run/systemd/system && perl -e 'sleep int(rand(43200))' && certbot -q renew
+
 exit
 
 echo " TOP né? rsrs."
